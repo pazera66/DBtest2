@@ -10,6 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface RoleDAO extends CrudRepository<RoleDB, Long> {
 
-    public Role findByName(String name);
+    public long findByRole(String role);
 
 }

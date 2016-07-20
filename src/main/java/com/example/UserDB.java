@@ -1,6 +1,7 @@
 package com.example;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,9 +13,10 @@ import javax.validation.constraints.NotNull;
 @Table(name="users")
 public class UserDB {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long userID;
 
     @NotNull
     private String login;
@@ -22,6 +24,8 @@ public class UserDB {
     @NotNull
     private String passwordHash;
 
+
+    @Column(name = "role_id")
     private long roleID;
 
 
@@ -30,13 +34,11 @@ public class UserDB {
 
     public UserDB (){}
 
-    public UserDB(long id){
-        this.id=id;
-    }
 
-    public UserDB(String login, String passwordHash){
+    public UserDB(String login, String passwordHash, long roleid){
         this.login=login;
         this.passwordHash = passwordHash;
+        this.roleID=roleid;
 
     }
 
@@ -48,16 +50,16 @@ public class UserDB {
 //    }
 
 
-    String getLogin(){
+    public long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
+
+    public String getLogin() {
         return login;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public void setLogin(String login) {
@@ -72,5 +74,11 @@ public class UserDB {
         this.passwordHash = passwordHash;
     }
 
+    public long getRoleID() {
+        return roleID;
+    }
 
+    public void setRoleID(long roleID) {
+        this.roleID = roleID;
+    }
 }
